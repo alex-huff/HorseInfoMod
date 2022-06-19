@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fabric-horseinfo-mod",
+  "version": "${version}",
+
+  "name": "HorseInfo",
+  "description": "Get horse info.",
+  "authors": [
+    "phonis"
+  ],
+
+  "icon": "assets/fabric-horseinfo-mod/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.phonis.horseinfo.HorseInfo"
+    ]
+  },
+  "mixins": [
+    "fabric-horseinfo-mod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  }
+}
