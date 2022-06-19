@@ -10,16 +10,21 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractHorseEntity.class)
-public class HorseInteractMixin {
-    @Inject(at = @At("HEAD"), method = "putPlayerOnBack")
-    private void onHorseInteract(final PlayerEntity player, CallbackInfo info) {
-        AbstractHorseEntity he = ((AbstractHorseEntity) (Object) this);
+public
+class HorseInteractMixin
+{
+	@Inject(at = @At("HEAD"), method = "putPlayerOnBack")
+	private
+	void onHorseInteract(final PlayerEntity player, CallbackInfo info)
+	{
+		AbstractHorseEntity he = ((AbstractHorseEntity) (Object) this);
 
-        if (he.world.isClient()) {
-            double speed = he.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-            double jumpStrength = he.getAttributeValue(EntityAttributes.HORSE_JUMP_STRENGTH);
+		if (he.world.isClient())
+		{
+			double speed        = he.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+			double jumpStrength = he.getAttributeValue(EntityAttributes.HORSE_JUMP_STRENGTH);
 
-            player.sendMessage(Text.of("Speed: " + speed + " Jump: " + jumpStrength), false);
-        }
-    }
+			player.sendMessage(Text.of("Speed: " + speed + " Jump: " + jumpStrength), false);
+		}
+	}
 }
