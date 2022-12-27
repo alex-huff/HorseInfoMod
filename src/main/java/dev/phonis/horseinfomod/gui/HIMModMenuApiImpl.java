@@ -12,4 +12,5 @@ class HIMModMenuApiImpl implements ModMenuApi
     {
         return ConfigScreen::getConfigScreen;
     }
+
 }

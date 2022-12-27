@@ -1,3 +1,11 @@
 {
-  "title.horseinfomod.config": "Horse Info Mod Settings"
+  "binding.horseinfomod.hIMMenu": "Open HorseInfoMod Settings",
+  "binding.horseinfomod.hIMOverlay": "Activate Horse Info Overlay",
+  "title.horseinfomod.config": "HorseInfoMod Settings",
+  "category.horseinfomod.horseInfoMod": "HorseInfoMod",
+  "category.horseinfomod.visual": "Visual",
+  "category.horseinfomod.keybindings": "Keybindings",
+  "option.horseinfomod.renderScale": "Scale",
+  "tooltip.horseinfomod.renderScale": "Scale of the horse info overlay",
+  "modmenu.descriptionTranslation.modmenu": "Horse info overlay"
 }

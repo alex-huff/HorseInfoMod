@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "horseinfomod",
   "version": "${version}",
-  "name": "Horse Info Mod",
+  "name": "HorseInfoMod",
   "description": "View info about a horse's attributes by hovering over it.",
   "authors": ["phonis"],
   "contributors": ["Horse icon created by Smashicons - Flaticon"],
@@ -34,7 +34,10 @@
   {
     "fabricloader": ">=0.14.12",
     "fabric": "*",
-    "minecraft": "1.19.2"
+    "minecraft": "~1.19",
+    "fabric-key-binding-api-v1": "*",
+    "cloth-config2": ">=8.2.88",
+    "java": ">=17"
   },
   "custom":
   {
