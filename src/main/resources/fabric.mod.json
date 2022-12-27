@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "horseinfomod",
+  "version": "${version}",
+  "name": "Horse Info Mod",
+  "description": "View info about a horse's attributes by hovering over it.",
+  "authors": ["phonis"],
+  "contributors": ["Horse icon created by Smashicons - Flaticon"],
+  "license": "CC0-1.0",
+  "icon": "assets/horseinfomod/HIM.png",
+  "contact":
+  {
+    "sources": "https://github.com/alex-huff/HorseInfoMod",
+    "issues": "https://github.com/alex-huff/HorseInfoMod/issues",
+    "homepage": "https://github.com/alex-huff/HorseInfoMod"
+  },
+  "environment": "client",
+  "entrypoints":
+  {
+    "client":
+    [
+      "dev.phonis.horseinfomod.HorseInfoMod"
+    ],
+    "modmenu":
+    [
+      "dev.phonis.horseinfomod.gui.HIMModMenuApiImpl"
+    ]
+  },
+  "mixins":
+  [
+    "horseinfomod.mixins.json"
+  ],
+  "depends":
+  {
+    "fabricloader": ">=0.14.12",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  },
+  "custom":
+  {
+    "modmenu":
+    {
+      "links":
+      {
+        "github": "https://github.com/alex-huff/HorseInfoMod"
+      }
+    }
+  }
+}
