@@ -24,13 +24,12 @@ class HorseOverlayRenderer
         RGBAColor       percentBackground = new RGBAColor(0, 0, 0, 255);
         MinecraftClient minecraftClient   = MinecraftClient.getInstance();
         TextRenderer    textRenderer      = minecraftClient.textRenderer;
-        String speedLabel = "Speed:     " + HorsieUtils.getMovementSpeed(horsie) + " / " +
+        String speedLabel = "Speed:  " + HorsieUtils.getMovementSpeed(horsie) + " / " +
                             HorsieUtils.getMaxMovementSpeed();
-        String jumpLabel = "Jump:      " + HorsieUtils.getJumpStrength(horsie) + " / " +
-                           HorsieUtils.getMaxJumpStrength();
-        String healthLabel = "Health:    " + HorsieUtils.getHealth(horsie) + " / " + HorsieUtils.getMaxHealth();
-        String cockSizeLabel = "Cock Size: " + HorsieUtils.getCockSize(horsie) + " / " + HorsieUtils.getMaxCockSize() +
-                               " inches";
+        String jumpLabel     = "Jump:   " + HorsieUtils.getJumpStrength(horsie) + " / " +
+                               HorsieUtils.getMaxJumpStrength();
+        String healthLabel   = "Health: " + HorsieUtils.getHealth(horsie) + " / " + HorsieUtils.getMaxHealth();
+        String cockSizeLabel = "Score:  " + HorsieUtils.getScore(horsie) + " / " + HorsieUtils.getMaxScore();
         float maxLabelWidth = Stream.of(speedLabel, jumpLabel, healthLabel, cockSizeLabel)
             .mapToInt(textRenderer::getWidth).max().getAsInt();
         float width = margin + maxLabelWidth + margin + barWidth + margin;
@@ -45,27 +44,23 @@ class HorseOverlayRenderer
         matrixStack.translate(margin, margin, 0);
         textRenderer.drawWithShadow(matrixStack, speedLabel, 0, 0, 0xFFFFFFFF);
         matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground, HorsieUtils.getMovementSpeedPercent(horsie),
-            barWidth,
-            textRenderer.fontHeight);
+        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
+            HorsieUtils.getMovementSpeedPercent(horsie), barWidth, textRenderer.fontHeight);
         matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
         textRenderer.drawWithShadow(matrixStack, jumpLabel, 0, 0, 0xFFFFFFFF);
         matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground, HorsieUtils.getJumpStrengthPercent(horsie),
-            barWidth,
-            textRenderer.fontHeight);
+        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
+            HorsieUtils.getJumpStrengthPercent(horsie), barWidth, textRenderer.fontHeight);
         matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
         textRenderer.drawWithShadow(matrixStack, healthLabel, 0, 0, 0xFFFFFFFF);
         matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground, HorsieUtils.getHealthPercent(horsie),
-            barWidth,
-            textRenderer.fontHeight);
+        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
+            HorsieUtils.getHealthPercent(horsie), barWidth, textRenderer.fontHeight);
         matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
         textRenderer.drawWithShadow(matrixStack, cockSizeLabel, 0, 0, 0xFFFFFFFF);
         matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground, HorsieUtils.getCockSizePercent(horsie),
-            barWidth,
-            textRenderer.fontHeight);
+        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
+            HorsieUtils.getScorePercent(horsie), barWidth, textRenderer.fontHeight);
         matrixStack.pop();
     }
 

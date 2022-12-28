@@ -36,9 +36,9 @@ class HorsieUtils
     }
 
     public static
-    int getMaxCockSize()
+    int getMaxScore()
     {
-        return 64;
+        return 1;
     }
 
     public static
@@ -78,17 +78,17 @@ class HorsieUtils
     }
 
     public static
-    double getCockSizePercent(AbstractHorseEntity horsie)
+    double getScorePercent(AbstractHorseEntity horsie)
     {
-        return HorsieUtils.getCockSize(horsie) / HorsieUtils.getMaxCockSize();
+        return HorsieUtils.getScore(horsie) / HorsieUtils.getMaxScore();
     }
 
     public static
-    double getCockSize(AbstractHorseEntity horsie)
+    double getScore(AbstractHorseEntity horsie)
     {
         return (HorsieUtils.getMovementSpeed(horsie) / HorsieUtils.getMaxMovementSpeed() +
                 HorsieUtils.getJumpStrength(horsie) / HorsieUtils.getMaxJumpStrength() +
-                HorsieUtils.getHealth(horsie) / HorsieUtils.getMaxHealth()) / 3 * HorsieUtils.getMaxCockSize();
+                HorsieUtils.getHealth(horsie) / HorsieUtils.getMaxHealth()) / 3;
     }
 
     public static
