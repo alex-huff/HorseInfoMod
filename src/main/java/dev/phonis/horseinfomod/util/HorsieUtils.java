@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
@@ -89,6 +90,42 @@ class HorsieUtils
         return (HorsieUtils.getMovementSpeed(horsie) / HorsieUtils.getMaxMovementSpeed() +
                 HorsieUtils.getJumpStrength(horsie) / HorsieUtils.getMaxJumpStrength() +
                 HorsieUtils.getHealth(horsie) / HorsieUtils.getMaxHealth()) / 3;
+    }
+
+    public static
+    String getColorString(AbstractHorseEntity horsie)
+    {
+        if (horsie instanceof HorseEntity horsieHorse)
+        {
+            return switch (horsieHorse.getColor())
+                {
+                    case CHESTNUT -> "Chestnut";
+                    case BLACK -> "Black";
+                    case BROWN -> "Brown";
+                    case CREAMY -> "Creamy";
+                    case DARKBROWN -> "Dark brown";
+                    case GRAY -> "Gray";
+                    case WHITE -> "White";
+                };
+        }
+        return "N/A";
+    }
+
+    public static
+    String getMarkingString(AbstractHorseEntity horsie)
+    {
+        if (horsie instanceof HorseEntity horsieHorse)
+        {
+            return switch (horsieHorse.getMarking())
+                {
+                    case BLACK_DOTS -> "Black dots";
+                    case WHITE_DOTS -> "White spots";
+                    case WHITE_FIELD -> "White field";
+                    case WHITE -> "White stockings and blaze";
+                    case NONE -> "None";
+                };
+        }
+        return "N/A";
     }
 
     public static

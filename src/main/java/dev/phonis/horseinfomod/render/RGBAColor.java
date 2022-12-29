@@ -41,6 +41,16 @@ class RGBAColor
     }
 
     public
+    int toRGBInt()
+    {
+        int red   = this.r & 0xFF;
+        int green = this.g & 0xFF;
+        int blue  = this.b & 0xFF;
+
+        return (red << 16) + (green << 8) + (blue);
+    }
+
+    public
     Color toSheDanielColor()
     {
         return Color.ofRGB(this.r, this.g, this.b);

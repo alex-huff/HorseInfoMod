@@ -1,13 +1,14 @@
 package dev.phonis.horseinfomod.render;
 
 import dev.phonis.horseinfomod.config.HIMConfig;
+import dev.phonis.horseinfomod.render.grid.*;
 import dev.phonis.horseinfomod.util.HorsieUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 
-import java.util.stream.Stream;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 public
 class HorseOverlayRenderer
@@ -16,52 +17,82 @@ class HorseOverlayRenderer
     public static
     void renderHorseOverlay(MatrixStack matrixStack, float tickDelta, AbstractHorseEntity horsie)
     {
-        float           scale             = HIMConfig.INSTANCE.renderScale / 100F;
-        float           margin            = 10F;
-        float           barWidth          = 60F;
-        RGBAColor       backgroundColor   = new RGBAColor(20, 20, 20, 200);
-        RGBAColor       percentForeground = new RGBAColor(60, 200, 50, 255);
-        RGBAColor       percentBackground = new RGBAColor(0, 0, 0, 255);
-        MinecraftClient minecraftClient   = MinecraftClient.getInstance();
-        TextRenderer    textRenderer      = minecraftClient.textRenderer;
-        String speedLabel = "Speed:  " + HorsieUtils.getMovementSpeed(horsie) + " / " +
-                            HorsieUtils.getMaxMovementSpeed();
-        String jumpLabel     = "Jump:   " + HorsieUtils.getJumpStrength(horsie) + " / " +
-                               HorsieUtils.getMaxJumpStrength();
-        String healthLabel   = "Health: " + HorsieUtils.getHealth(horsie) + " / " + HorsieUtils.getMaxHealth();
-        String cockSizeLabel = "Score:  " + HorsieUtils.getScore(horsie) + " / " + HorsieUtils.getMaxScore();
-        float maxLabelWidth = Stream.of(speedLabel, jumpLabel, healthLabel, cockSizeLabel)
-            .mapToInt(textRenderer::getWidth).max().getAsInt();
-        float width = margin + maxLabelWidth + margin + barWidth + margin;
-        float height = margin + textRenderer.fontHeight + margin + textRenderer.fontHeight + margin +
-                       textRenderer.fontHeight + margin + textRenderer.fontHeight + margin;
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        float           scale           = HIMConfig.INSTANCE.renderScale / 100F;
+        float           barWidth        = 60F;
+        float           barHeight       = minecraftClient.textRenderer.fontHeight;
+        RenderGrid renderGridStats = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
+            {
+                new TextRenderGridCell("Speed:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMovementSpeed(horsie)),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxMovementSpeed()),
+                    HIMConfig.INSTANCE.textColor),
+                new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
+                    barWidth, barHeight, HorsieUtils.getMovementSpeedPercent(horsie))
+            }, {
+                new TextRenderGridCell("Jump:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getJumpStrength(horsie)),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxJumpStrength()),
+                    HIMConfig.INSTANCE.textColor),
+                new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
+                    barWidth, barHeight, HorsieUtils.getJumpStrengthPercent(horsie))
+            }, {
+                new TextRenderGridCell("Health:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getHealth(horsie)),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxHealth()),
+                    HIMConfig.INSTANCE.textColor),
+                new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
+                    barWidth, barHeight, HorsieUtils.getHealthPercent(horsie))
+            }, {
+                new TextRenderGridCell("Score:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getScore(horsie)),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxScore()),
+                    HIMConfig.INSTANCE.textColor),
+                new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
+                    barWidth, barHeight, HorsieUtils.getScore(horsie))
+            },
+            });
+        RenderGrid visualTraits = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
+            {
+                new TextRenderGridCell("Color:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorsieUtils.getColorString(horsie), HIMConfig.INSTANCE.textColor)
+            }, {
+                new TextRenderGridCell("Marking:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorsieUtils.getMarkingString(horsie), HIMConfig.INSTANCE.textColor)
+            }
+        });
+        RenderGrid renderGridPreview = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
+            { new HorsePreviewRenderGridCell(horsie, tickDelta, 35), visualTraits }
+        });
+        RenderGrid renderGridFull = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
+            { renderGridStats }, { renderGridPreview }
+        });
+        double width  = HIMConfig.INSTANCE.margin + renderGridFull.getWidth() + HIMConfig.INSTANCE.margin;
+        double height = HIMConfig.INSTANCE.margin + renderGridFull.getHeight() + HIMConfig.INSTANCE.margin;
         matrixStack.push();
         matrixStack.translate(minecraftClient.getWindow().getScaledWidth() / 2.0,
             minecraftClient.getWindow().getScaledHeight() / 2.0, 0);
-        matrixStack.scale(scale, scale, 0);
+        matrixStack.scale(scale, scale, scale);
         matrixStack.translate(-width / 2, -height / 2, 0);
-        RenderUtils.renderBox(matrixStack, backgroundColor, width, height);
-        matrixStack.translate(margin, margin, 0);
-        textRenderer.drawWithShadow(matrixStack, speedLabel, 0, 0, 0xFFFFFFFF);
-        matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
-            HorsieUtils.getMovementSpeedPercent(horsie), barWidth, textRenderer.fontHeight);
-        matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
-        textRenderer.drawWithShadow(matrixStack, jumpLabel, 0, 0, 0xFFFFFFFF);
-        matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
-            HorsieUtils.getJumpStrengthPercent(horsie), barWidth, textRenderer.fontHeight);
-        matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
-        textRenderer.drawWithShadow(matrixStack, healthLabel, 0, 0, 0xFFFFFFFF);
-        matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
-            HorsieUtils.getHealthPercent(horsie), barWidth, textRenderer.fontHeight);
-        matrixStack.translate(-(maxLabelWidth + margin), textRenderer.fontHeight + margin, 0);
-        textRenderer.drawWithShadow(matrixStack, cockSizeLabel, 0, 0, 0xFFFFFFFF);
-        matrixStack.translate(maxLabelWidth + margin, 0, 0);
-        RenderUtils.renderPercentBar(matrixStack, percentBackground, percentForeground,
-            HorsieUtils.getScorePercent(horsie), barWidth, textRenderer.fontHeight);
+        RenderUtils.renderBox(matrixStack, HIMConfig.INSTANCE.overlayBackgroundColor, (float) width, (float) height);
+        matrixStack.translate(HIMConfig.INSTANCE.margin, HIMConfig.INSTANCE.margin, 0);
+        renderGridFull.render(matrixStack);
         matrixStack.pop();
+    }
+
+    private static
+    String formatDouble(double number)
+    {
+        if (HIMConfig.INSTANCE.roundNumbers)
+        {
+            return new BigDecimal(number).round(new MathContext(HIMConfig.INSTANCE.roundingPrecision))
+                .stripTrailingZeros().toPlainString();
+        }
+        return Double.toString(number);
     }
 
 }

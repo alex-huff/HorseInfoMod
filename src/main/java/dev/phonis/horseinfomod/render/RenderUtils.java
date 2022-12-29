@@ -1,8 +1,11 @@
 package dev.phonis.horseinfomod.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 
 public
@@ -49,6 +52,38 @@ class RenderUtils
         matrixStack.translate(percent * width, 0, 0);
         RenderUtils.renderBox(matrixStack, backgroundColor, (float) ((1 - percent) * width), height);
         matrixStack.translate(-percent * width, 0, 0);
+    }
+
+    public static
+    void renderHorsePreview(MatrixStack matrixStack, AbstractHorseEntity horsie, float tickDelta, float horsePreviewYaw)
+    {
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        float oldPrevBodyYaw  = horsie.prevBodyYaw;
+        float oldBodyYaw      = horsie.getBodyYaw();
+        float oldPrevHeadYaw  = horsie.prevYaw;
+        float oldHeadYaw      = horsie.getYaw();
+        horsie.prevBodyYaw = horsePreviewYaw;
+        horsie.setBodyYaw(horsePreviewYaw);
+        horsie.prevHeadYaw = horsePreviewYaw;
+        horsie.setHeadYaw(horsePreviewYaw);
+        /*
+        I should not have to do this. I should just be able to control whether the name
+        tag is rendered from within the entity, but EntityRenderer seems to ignore
+        the relevant setting even though the code appears to take it into account? I think
+        there might be a conflict with another mod.
+         */
+        EntityRenderController.withNameTagsOff(() ->
+        {
+            minecraftClient.getEntityRenderDispatcher().getRenderer(horsie)
+                .render(horsie, MathHelper.lerp(tickDelta, horsie.prevYaw, horsie.getYaw()), tickDelta, matrixStack,
+                    minecraftClient.getBufferBuilders().getEntityVertexConsumers(),
+                    minecraftClient.getEntityRenderDispatcher().getLight(horsie, tickDelta));
+            minecraftClient.getBufferBuilders().getEntityVertexConsumers().draw();
+        });
+        horsie.prevBodyYaw = oldPrevBodyYaw;
+        horsie.setBodyYaw(oldBodyYaw);
+        horsie.prevHeadYaw = oldPrevHeadYaw;
+        horsie.setHeadYaw(oldHeadYaw);
     }
 
 }
