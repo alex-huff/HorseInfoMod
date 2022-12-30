@@ -74,8 +74,9 @@ class ConfigScreen
             .setTitle(MutableText.of(ConfigScreen.configTitle));
         builder.setSavingRunnable(HIMConfig::trySave);
 
-        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-        ConfigCategory visualsCategory = builder.getOrCreateCategory(MutableText.of(ConfigScreen.visualCategoryName));
+        ConfigEntryBuilder entryBuilder    = builder.entryBuilder();
+        ConfigCategory     visualsCategory = builder.getOrCreateCategory(
+            MutableText.of(ConfigScreen.visualCategoryName));
 
         visualsCategory.addEntry(
             entryBuilder.startIntSlider(MutableText.of(ConfigScreen.renderScaleOption), HIMConfig.INSTANCE.renderScale,
@@ -127,7 +128,7 @@ class ConfigScreen
 
         visualsCategory.addEntry(
             entryBuilder.startIntSlider(MutableText.of(ConfigScreen.overlayForegroundTransparencyOption),
-                    HIMConfig.INSTANCE.overlayForegroundTransparency, 0, 255)
+                    HIMConfig.INSTANCE.getOverlayForegroundTransparency(), 0, 255)
                 .setDefaultValue(HIMConfig.defaultOverlayForegroundTransparency)
                 .setTooltip(MutableText.of(ConfigScreen.overlayForegroundTransparencyTooltip))
                 .setSaveConsumer(HIMConfig.INSTANCE::setOverlayForegroundTransparency).build());

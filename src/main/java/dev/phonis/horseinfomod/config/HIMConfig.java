@@ -33,15 +33,15 @@ class HIMConfig
     public static        int       defaultRoundingPrecision             = 4;
     public static final  HIMConfig INSTANCE                             = HIMConfig.load();
 
-    public int       renderScale;
-    public int       overlayForegroundTransparency;
-    public RGBAColor percentColor1;
-    public RGBAColor percentColor2;
-    public RGBAColor overlayBackgroundColor;
-    public RGBAColor textColor;
-    public int       margin;
-    public boolean   roundNumbers;
-    public int       roundingPrecision;
+    public  int       renderScale;
+    private int       overlayForegroundTransparency;
+    public  RGBAColor percentColor1;
+    public  RGBAColor percentColor2;
+    public  RGBAColor overlayBackgroundColor;
+    public  RGBAColor textColor;
+    public  int       margin;
+    public  boolean   roundNumbers;
+    public  int       roundingPrecision;
 
     public
     HIMConfig()
@@ -73,6 +73,12 @@ class HIMConfig
         }
 
         return new HIMConfig();
+    }
+
+    public
+    int getOverlayForegroundTransparency()
+    {
+        return this.overlayForegroundTransparency;
     }
 
     public
