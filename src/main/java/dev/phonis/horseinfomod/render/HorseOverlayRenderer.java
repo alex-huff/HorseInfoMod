@@ -63,6 +63,9 @@ class HorseOverlayRenderer
             }, {
                 new TextRenderGridCell("Marking:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorsieUtils.getMarkingString(horsie), HIMConfig.INSTANCE.textColor)
+            }, {
+                new TextRenderGridCell("Name:", HIMConfig.INSTANCE.textColor),
+                new TextRenderGridCell(HorsieUtils.getCustomNameString(horsie), HIMConfig.INSTANCE.textColor)
             }
         });
         RenderGrid renderGridPreview = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{

@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static dev.phonis.horseinfomod.util.RandomUtils.getMaxRandomNextDouble;
@@ -124,6 +125,16 @@ class HorsieUtils
                     case WHITE -> "White stockings and blaze";
                     case NONE -> "None";
                 };
+        }
+        return "N/A";
+    }
+
+    public static
+    String getCustomNameString(AbstractHorseEntity horsie)
+    {
+        if (horsie.hasCustomName())
+        {
+            return Objects.requireNonNull(horsie.getCustomName()).getString();
         }
         return "N/A";
     }
