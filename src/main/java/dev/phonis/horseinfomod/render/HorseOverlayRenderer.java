@@ -3,12 +3,10 @@ package dev.phonis.horseinfomod.render;
 import dev.phonis.horseinfomod.config.HIMConfig;
 import dev.phonis.horseinfomod.render.grid.*;
 import dev.phonis.horseinfomod.util.HorsieUtils;
+import dev.phonis.horseinfomod.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
 
 public
 class HorseOverlayRenderer
@@ -24,33 +22,33 @@ class HorseOverlayRenderer
         RenderGrid renderGridStats = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
             {
                 new TextRenderGridCell("Speed:", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMovementSpeed(horsie)),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getMovementSpeed(horsie)),
                     HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxMovementSpeed()),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getMaxMovementSpeed()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
                     barWidth, barHeight, HorsieUtils.getMovementSpeedPercent(horsie))
             }, {
                 new TextRenderGridCell("Jump:", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getJumpStrength(horsie)),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getJumpStrength(horsie)),
                     HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxJumpStrength()),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getMaxJumpStrength()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
                     barWidth, barHeight, HorsieUtils.getJumpStrengthPercent(horsie))
             }, {
                 new TextRenderGridCell("Health:", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getHealth(horsie)),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getHealth(horsie)),
                     HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxHealth()),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getMaxHealth()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
                     barWidth, barHeight, HorsieUtils.getHealthPercent(horsie))
             }, {
                 new TextRenderGridCell("Score:", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getScore(horsie)),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getScore(horsie)),
                     HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
-                new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxScore()),
+                new TextRenderGridCell(StringUtils.formatDouble(HorsieUtils.getMaxScore()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
                     barWidth, barHeight, HorsieUtils.getScore(horsie))
@@ -85,17 +83,6 @@ class HorseOverlayRenderer
         matrixStack.translate(HIMConfig.INSTANCE.margin, HIMConfig.INSTANCE.margin, 0);
         renderGridFull.render(matrixStack);
         matrixStack.pop();
-    }
-
-    private static
-    String formatDouble(double number)
-    {
-        if (HIMConfig.INSTANCE.roundNumbers)
-        {
-            return new BigDecimal(number).round(new MathContext(HIMConfig.INSTANCE.roundingPrecision))
-                .stripTrailingZeros().toPlainString();
-        }
-        return Double.toString(number);
     }
 
 }

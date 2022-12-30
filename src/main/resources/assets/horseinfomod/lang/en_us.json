@@ -1,6 +1,7 @@
 {
   "binding.horseinfomod.hIMMenu": "Open HorseInfoMod Settings",
   "binding.horseinfomod.hIMOverlay": "Activate Horse Info Overlay",
+  "binding.horseinfomod.printDetailsInChat": "Print Horse Info",
   "title.horseinfomod.config": "HorseInfoMod Settings",
   "category.horseinfomod.horseInfoMod": "HorseInfoMod",
   "category.horseinfomod.visual": "Visual",

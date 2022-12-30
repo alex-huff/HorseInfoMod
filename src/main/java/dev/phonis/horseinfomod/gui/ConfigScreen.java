@@ -66,6 +66,8 @@ class ConfigScreen
         "binding.horseinfomod.hIMMenu");
     private static final TranslatableTextContent activateOverlayBindingName           = new TranslatableTextContent(
         "binding.horseinfomod.hIMOverlay");
+    private static final TranslatableTextContent printDetailsInChatName               = new TranslatableTextContent(
+        "binding.horseinfomod.printDetailsInChat");
 
     public static
     Screen getConfigScreen(Screen parent)
@@ -74,9 +76,8 @@ class ConfigScreen
             .setTitle(MutableText.of(ConfigScreen.configTitle));
         builder.setSavingRunnable(HIMConfig::trySave);
 
-        ConfigEntryBuilder entryBuilder    = builder.entryBuilder();
-        ConfigCategory     visualsCategory = builder.getOrCreateCategory(
-            MutableText.of(ConfigScreen.visualCategoryName));
+        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+        ConfigCategory visualsCategory = builder.getOrCreateCategory(MutableText.of(ConfigScreen.visualCategoryName));
 
         visualsCategory.addEntry(
             entryBuilder.startIntSlider(MutableText.of(ConfigScreen.renderScaleOption), HIMConfig.INSTANCE.renderScale,
@@ -140,6 +141,8 @@ class ConfigScreen
             Keybindings.openConfigScreenKeyBinding, ConfigScreen.hIMMenuBindingName);
         ConfigScreen.addKeybindingEntryToCategory(keybindingsCategory, entryBuilder, Keybindings.activateOverlayBinding,
             ConfigScreen.activateOverlayBindingName);
+        ConfigScreen.addKeybindingEntryToCategory(keybindingsCategory, entryBuilder, Keybindings.printDetailsInChat,
+            ConfigScreen.printDetailsInChatName);
 
         return builder.build();
     }

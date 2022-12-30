@@ -1,10 +1,12 @@
 package dev.phonis.horseinfomod.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.HorseEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
@@ -137,6 +139,29 @@ class HorsieUtils
             return Objects.requireNonNull(horsie.getCustomName()).getString();
         }
         return "N/A";
+    }
+
+    public static
+    void printHorseDetailsInChat(AbstractHorseEntity horsie)
+    {
+        MinecraftClient    minecraftClient = MinecraftClient.getInstance();
+        ClientPlayerEntity player          = minecraftClient.player;
+        String speedMessage = "Speed: " + StringUtils.formatDouble(HorsieUtils.getMovementSpeed(horsie)) + " / " +
+                              StringUtils.formatDouble(HorsieUtils.getMaxMovementSpeed());
+        String jumpMessage = "Jump: " + StringUtils.formatDouble(HorsieUtils.getJumpStrength(horsie)) + " / " +
+                             StringUtils.formatDouble(HorsieUtils.getMaxJumpStrength());
+        String healthMessage = "Health: " + StringUtils.formatDouble(HorsieUtils.getHealth(horsie)) + " / " +
+                               StringUtils.formatDouble(HorsieUtils.getMaxHealth());
+        String scoreMessage = "Score: " + StringUtils.formatDouble(HorsieUtils.getScore(horsie)) + " / " +
+                              StringUtils.formatDouble(HorsieUtils.getMaxScore());
+        if (player == null)
+        {
+            return;
+        }
+        player.sendMessage(Text.of(speedMessage));
+        player.sendMessage(Text.of(jumpMessage));
+        player.sendMessage(Text.of(healthMessage));
+        player.sendMessage(Text.of(scoreMessage));
     }
 
     public static
