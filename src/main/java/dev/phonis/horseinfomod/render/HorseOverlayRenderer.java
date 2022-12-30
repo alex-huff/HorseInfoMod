@@ -56,7 +56,7 @@ class HorseOverlayRenderer
                     barWidth, barHeight, HorsieUtils.getScore(horsie))
             },
             });
-        RenderGrid visualTraits = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
+        RenderGrid renderGridVisualTraits = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
             {
                 new TextRenderGridCell("Color:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorsieUtils.getColorString(horsie), HIMConfig.INSTANCE.textColor)
@@ -69,7 +69,7 @@ class HorseOverlayRenderer
             }
         });
         RenderGrid renderGridPreview = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
-            { new HorsePreviewRenderGridCell(horsie, tickDelta, 35), visualTraits }
+            { new HorsePreviewRenderGridCell(horsie, tickDelta, 35), renderGridVisualTraits }
         });
         RenderGrid renderGridFull = RenderGridImpl.of(HIMConfig.INSTANCE.margin, new RenderGridCell[][]{
             { renderGridStats }, { renderGridPreview }
