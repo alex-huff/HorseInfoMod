@@ -25,7 +25,7 @@ class HorseOverlayRenderer
             {
                 new TextRenderGridCell("Speed:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMovementSpeed(horsie)),
-                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxMovementSpeed()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
@@ -33,7 +33,7 @@ class HorseOverlayRenderer
             }, {
                 new TextRenderGridCell("Jump:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getJumpStrength(horsie)),
-                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxJumpStrength()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
@@ -41,7 +41,7 @@ class HorseOverlayRenderer
             }, {
                 new TextRenderGridCell("Health:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getHealth(horsie)),
-                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxHealth()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
@@ -49,7 +49,7 @@ class HorseOverlayRenderer
             }, {
                 new TextRenderGridCell("Score:", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getScore(horsie)),
-                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell(" / ", HIMConfig.INSTANCE.textColor),
+                    HIMConfig.INSTANCE.textColor), new TextRenderGridCell("/", HIMConfig.INSTANCE.textColor),
                 new TextRenderGridCell(HorseOverlayRenderer.formatDouble(HorsieUtils.getMaxScore()),
                     HIMConfig.INSTANCE.textColor),
                 new PercentBarRenderGridCell(HIMConfig.INSTANCE.percentColor1, HIMConfig.INSTANCE.percentColor2,
