@@ -34,7 +34,7 @@
   {
     "fabricloader": ">=0.14.12",
     "fabric": "*",
-    "minecraft": "~1.19",
+    "minecraft": "1.19.3",
     "fabric-key-binding-api-v1": "*",
     "cloth-config2": ">=8.2.88",
     "java": ">=17"

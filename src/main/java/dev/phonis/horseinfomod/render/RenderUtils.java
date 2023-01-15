@@ -6,7 +6,7 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix4f;
 
 public
 class RenderUtils
@@ -33,7 +33,7 @@ class RenderUtils
     {
         Matrix4f positionMatrix = matrixStack.peek().getPositionMatrix();
         RenderUtils.setupRender();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         bufferBuilder.vertex(positionMatrix, 0, 0, 0).color(color.r, color.g, color.b, color.a).next();

@@ -5,6 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.entity.passive.HorseColor;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;
@@ -100,13 +101,13 @@ class HorsieUtils
     {
         if (horsie instanceof HorseEntity horsieHorse)
         {
-            return switch (horsieHorse.getColor())
+            return switch (horsieHorse.getVariant())
                 {
                     case CHESTNUT -> "Chestnut";
                     case BLACK -> "Black";
                     case BROWN -> "Brown";
                     case CREAMY -> "Creamy";
-                    case DARKBROWN -> "Dark brown";
+                    case DARK_BROWN -> "Dark brown";
                     case GRAY -> "Gray";
                     case WHITE -> "White";
                 };
