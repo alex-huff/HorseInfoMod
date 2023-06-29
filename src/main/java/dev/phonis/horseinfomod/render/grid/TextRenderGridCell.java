@@ -24,7 +24,7 @@ class TextRenderGridCell implements RenderGridCell
     public
     void render(DrawContext drawContext)
     {
-        drawContext.drawText(this.textRenderer, this.text, 0, 0, this.color.toInt(), true);
+        drawContext.drawTextWithShadow(this.textRenderer, this.text, 0, 0, this.color.toInt());
     }
 
     @Override
