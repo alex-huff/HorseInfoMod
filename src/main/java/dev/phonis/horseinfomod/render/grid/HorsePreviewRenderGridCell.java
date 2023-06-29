@@ -29,10 +29,12 @@ class HorsePreviewRenderGridCell implements RenderGridCell
     void render(DrawContext drawContext)
     {
         drawContext.getMatrices().push();
-        drawContext.getMatrices().scale(scale, -scale, scale);
-        drawContext.getMatrices().translate(HorsePreviewRenderGridCell.baseWidth / 2, -HorsePreviewRenderGridCell.baseHeight,
-            HorsePreviewRenderGridCell.baseHeight);
-        RenderUtils.renderHorsePreview(drawContext.getMatrices(), horsie, tickDelta, HorsePreviewRenderGridCell.previewYaw);
+        drawContext.getMatrices().scale(this.scale, -this.scale, this.scale);
+        drawContext.getMatrices()
+            .translate(HorsePreviewRenderGridCell.baseWidth / 2, -HorsePreviewRenderGridCell.baseHeight,
+                HorsePreviewRenderGridCell.baseHeight);
+        RenderUtils.renderHorsePreview(drawContext.getMatrices(), this.horsie, this.tickDelta,
+            HorsePreviewRenderGridCell.previewYaw);
         drawContext.getMatrices().pop();
     }
 
@@ -40,14 +42,14 @@ class HorsePreviewRenderGridCell implements RenderGridCell
     public
     double getWidth()
     {
-        return HorsePreviewRenderGridCell.baseWidth * scale;
+        return HorsePreviewRenderGridCell.baseWidth * this.scale;
     }
 
     @Override
     public
     double getHeight()
     {
-        return HorsePreviewRenderGridCell.baseHeight * scale;
+        return HorsePreviewRenderGridCell.baseHeight * this.scale;
     }
 
 }
