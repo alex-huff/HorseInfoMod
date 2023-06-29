@@ -2,7 +2,7 @@ package dev.phonis.horseinfomod.render.grid;
 
 import dev.phonis.horseinfomod.render.RGBAColor;
 import dev.phonis.horseinfomod.render.RenderUtils;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public
 class PercentBarRenderGridCell implements RenderGridCell
@@ -26,9 +26,9 @@ class PercentBarRenderGridCell implements RenderGridCell
 
     @Override
     public
-    void render(MatrixStack matrixStack)
+    void render(DrawContext drawContext)
     {
-        RenderUtils.renderPercentBar(matrixStack, this.color2, this.color1, this.percent, this.width, this.height);
+        RenderUtils.renderPercentBar(drawContext.getMatrices(), this.color2, this.color1, this.percent, this.width, this.height);
     }
 
     @Override

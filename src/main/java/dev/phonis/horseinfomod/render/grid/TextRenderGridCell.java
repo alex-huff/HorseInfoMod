@@ -3,7 +3,7 @@ package dev.phonis.horseinfomod.render.grid;
 import dev.phonis.horseinfomod.render.RGBAColor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public
 class TextRenderGridCell implements RenderGridCell
@@ -22,9 +22,9 @@ class TextRenderGridCell implements RenderGridCell
 
     @Override
     public
-    void render(MatrixStack matrixStack)
+    void render(DrawContext drawContext)
     {
-        this.textRenderer.drawWithShadow(matrixStack, this.text, 0, 0, this.color.toInt());
+        drawContext.drawText(this.textRenderer, this.text, 0, 0, this.color.toInt(), true);
     }
 
     @Override

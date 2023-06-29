@@ -1,6 +1,6 @@
 package dev.phonis.horseinfomod.render.grid;
 
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -86,58 +86,58 @@ class RenderGridImpl implements RenderGrid
 
     @Override
     public
-    void render(MatrixStack matrixStack)
+    void render(DrawContext drawContext)
     {
-        matrixStack.push();
+        drawContext.getMatrices().push();
         for (int r = 0; r < this.grid.length; r++)
         {
-            matrixStack.push();
+            drawContext.getMatrices().push();
             for (int c = 0; c < this.grid[r].length; c++)
             {
-                matrixStack.push();
+                drawContext.getMatrices().push();
                 switch (this.grid[r][c].getAnchor())
                 {
                     case NORTH:
-                        matrixStack.translate(this.extraWidth(r, c) / 2, 0, 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c) / 2, 0, 0);
                         break;
                     case SOUTH:
-                        matrixStack.translate(this.extraWidth(r, c) / 2, this.extraHeight(r, c), 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c) / 2, this.extraHeight(r, c), 0);
                         break;
                     case EAST:
-                        matrixStack.translate(this.extraWidth(r, c), this.extraHeight(r, c) / 2, 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c), this.extraHeight(r, c) / 2, 0);
                         break;
                     case WEST:
-                        matrixStack.translate(0, this.extraHeight(r, c) / 2, 0);
+                        drawContext.getMatrices().translate(0, this.extraHeight(r, c) / 2, 0);
                         break;
                     case NORTHEAST:
-                        matrixStack.translate(this.extraWidth(r, c), 0, 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c), 0, 0);
                         break;
                     case NORTHWEST:
                         break;
                     case SOUTHEAST:
-                        matrixStack.translate(this.extraWidth(r, c), this.extraHeight(r, c), 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c), this.extraHeight(r, c), 0);
                         break;
                     case SOUTHWEST:
-                        matrixStack.translate(0, this.extraHeight(r, c), 0);
+                        drawContext.getMatrices().translate(0, this.extraHeight(r, c), 0);
                         break;
                     case MIDDLE:
-                        matrixStack.translate(this.extraWidth(r, c) / 2, this.extraHeight(r, c) / 2, 0);
+                        drawContext.getMatrices().translate(this.extraWidth(r, c) / 2, this.extraHeight(r, c) / 2, 0);
                         break;
                 }
-                this.grid[r][c].render(matrixStack);
-                matrixStack.pop();
+                this.grid[r][c].render(drawContext);
+                drawContext.getMatrices().pop();
                 if (c < this.grid[r].length - 1)
                 {
-                    matrixStack.translate(this.columnWidths[c] + margin, 0, 0);
+                    drawContext.getMatrices().translate(this.columnWidths[c] + margin, 0, 0);
                 }
             }
-            matrixStack.pop();
+            drawContext.getMatrices().pop();
             if (r < this.grid.length - 1)
             {
-                matrixStack.translate(0, this.rowHeights[r] + margin, 0);
+                drawContext.getMatrices().translate(0, this.rowHeights[r] + margin, 0);
             }
         }
-        matrixStack.pop();
+        drawContext.getMatrices().pop();
     }
 
     @Override

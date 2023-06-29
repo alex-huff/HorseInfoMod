@@ -5,7 +5,7 @@ import dev.phonis.horseinfomod.render.grid.*;
 import dev.phonis.horseinfomod.util.HorsieUtils;
 import dev.phonis.horseinfomod.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 
 public
@@ -13,7 +13,7 @@ class HorseOverlayRenderer
 {
 
     public static
-    void renderHorseOverlay(MatrixStack matrixStack, float tickDelta, AbstractHorseEntity horsie)
+    void renderHorseOverlay(DrawContext drawContext, float tickDelta, AbstractHorseEntity horsie)
     {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         float           scale           = HIMConfig.INSTANCE.renderScale / 100F;
@@ -74,15 +74,15 @@ class HorseOverlayRenderer
         });
         double width  = HIMConfig.INSTANCE.margin + renderGridFull.getWidth() + HIMConfig.INSTANCE.margin;
         double height = HIMConfig.INSTANCE.margin + renderGridFull.getHeight() + HIMConfig.INSTANCE.margin;
-        matrixStack.push();
-        matrixStack.translate(minecraftClient.getWindow().getScaledWidth() / 2.0,
+        drawContext.getMatrices().push();
+        drawContext.getMatrices().translate(minecraftClient.getWindow().getScaledWidth() / 2.0,
             minecraftClient.getWindow().getScaledHeight() / 2.0, 0);
-        matrixStack.scale(scale, scale, scale);
-        matrixStack.translate(-width / 2, -height / 2, 0);
-        RenderUtils.renderBox(matrixStack, HIMConfig.INSTANCE.overlayBackgroundColor, (float) width, (float) height);
-        matrixStack.translate(HIMConfig.INSTANCE.margin, HIMConfig.INSTANCE.margin, 0);
-        renderGridFull.render(matrixStack);
-        matrixStack.pop();
+        drawContext.getMatrices().scale(scale, scale, scale);
+        drawContext.getMatrices().translate(-width / 2, -height / 2, 0);
+        RenderUtils.renderBox(drawContext.getMatrices(), HIMConfig.INSTANCE.overlayBackgroundColor, (float) width, (float) height);
+        drawContext.getMatrices().translate(HIMConfig.INSTANCE.margin, HIMConfig.INSTANCE.margin, 0);
+        renderGridFull.render(drawContext);
+        drawContext.getMatrices().pop();
     }
 
 }

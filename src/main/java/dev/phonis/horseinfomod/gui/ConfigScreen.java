@@ -17,57 +17,57 @@ public
 class ConfigScreen
 {
     private static final TranslatableTextContent configTitle                          = new TranslatableTextContent(
-        "title.horseinfomod.config");
+        "title.horseinfomod.config", null, null);
     private static final TranslatableTextContent visualCategoryName                   = new TranslatableTextContent(
-        "category.horseinfomod.visual");
+        "category.horseinfomod.visual", null, null);
     private static final TranslatableTextContent keybindingsCategoryName              = new TranslatableTextContent(
-        "category.horseinfomod.keybindings");
+        "category.horseinfomod.keybindings", null, null);
     private static final TranslatableTextContent renderScaleOption                    = new TranslatableTextContent(
-        "option.horseinfomod.renderScale");
+        "option.horseinfomod.renderScale", null, null);
     private static final TranslatableTextContent marginOption                         = new TranslatableTextContent(
-        "option.horseinfomod.margin");
+        "option.horseinfomod.margin", null, null);
     private static final TranslatableTextContent roundNumbersOption                   = new TranslatableTextContent(
-        "option.horseinfomod.roundNumbers");
+        "option.horseinfomod.roundNumbers", null, null);
     private static final TranslatableTextContent roundingPrecisionOption              = new TranslatableTextContent(
-        "option.horseinfomod.roundingPrecision");
+        "option.horseinfomod.roundingPrecision", null, null);
     private static final TranslatableTextContent percentColor1Option                  = new TranslatableTextContent(
-        "option.horseinfomod.percentColor1");
+        "option.horseinfomod.percentColor1", null, null);
     private static final TranslatableTextContent percentColor2Option                  = new TranslatableTextContent(
-        "option.horseinfomod.percentColor2");
+        "option.horseinfomod.percentColor2", null, null);
     private static final TranslatableTextContent overlayBackgroundColorOption         = new TranslatableTextContent(
-        "option.horseinfomod.overlayBackgroundColor");
+        "option.horseinfomod.overlayBackgroundColor", null, null);
     private static final TranslatableTextContent textColorOption                      = new TranslatableTextContent(
-        "option.horseinfomod.textColor");
+        "option.horseinfomod.textColor", null, null);
     private static final TranslatableTextContent overlayBackgroundTransparencyOption  = new TranslatableTextContent(
-        "option.horseinfomod.overlayBackgroundTransparency");
+        "option.horseinfomod.overlayBackgroundTransparency", null, null);
     private static final TranslatableTextContent overlayForegroundTransparencyOption  = new TranslatableTextContent(
-        "option.horseinfomod.overlayForegroundTransparency");
+        "option.horseinfomod.overlayForegroundTransparency", null, null);
     private static final TranslatableTextContent renderScaleTooltip                   = new TranslatableTextContent(
-        "tooltip.horseinfomod.renderScale");
+        "tooltip.horseinfomod.renderScale", null, null);
     private static final TranslatableTextContent marginTooltip                        = new TranslatableTextContent(
-        "tooltip.horseinfomod.margin");
+        "tooltip.horseinfomod.margin", null, null);
     private static final TranslatableTextContent roundNumbersTooltip                  = new TranslatableTextContent(
-        "tooltip.horseinfomod.roundNumbers");
+        "tooltip.horseinfomod.roundNumbers", null, null);
     private static final TranslatableTextContent roundingPrecisionTooltip             = new TranslatableTextContent(
-        "tooltip.horseinfomod.roundingPrecision");
+        "tooltip.horseinfomod.roundingPrecision", null, null);
     private static final TranslatableTextContent percentColor1Tooltip                 = new TranslatableTextContent(
-        "tooltip.horseinfomod.percentColor1");
+        "tooltip.horseinfomod.percentColor1", null, null);
     private static final TranslatableTextContent percentColor2Tooltip                 = new TranslatableTextContent(
-        "tooltip.horseinfomod.percentColor2");
+        "tooltip.horseinfomod.percentColor2", null, null);
     private static final TranslatableTextContent overlayBackgroundColorTooltip        = new TranslatableTextContent(
-        "tooltip.horseinfomod.overlayBackgroundColor");
+        "tooltip.horseinfomod.overlayBackgroundColor", null, null);
     private static final TranslatableTextContent textColorTooltip                     = new TranslatableTextContent(
-        "tooltip.horseinfomod.textColor");
+        "tooltip.horseinfomod.textColor", null, null);
     private static final TranslatableTextContent overlayBackgroundTransparencyTooltip = new TranslatableTextContent(
-        "tooltip.horseinfomod.overlayBackgroundTransparency");
+        "tooltip.horseinfomod.overlayBackgroundTransparency", null, null);
     private static final TranslatableTextContent overlayForegroundTransparencyTooltip = new TranslatableTextContent(
-        "tooltip.horseinfomod.overlayForegroundTransparency");
+        "tooltip.horseinfomod.overlayForegroundTransparency", null, null);
     private static final TranslatableTextContent hIMMenuBindingName                   = new TranslatableTextContent(
-        "binding.horseinfomod.hIMMenu");
+        "binding.horseinfomod.hIMMenu", null, null);
     private static final TranslatableTextContent activateOverlayBindingName           = new TranslatableTextContent(
-        "binding.horseinfomod.hIMOverlay");
+        "binding.horseinfomod.hIMOverlay", null, null);
     private static final TranslatableTextContent printDetailsInChatName               = new TranslatableTextContent(
-        "binding.horseinfomod.printDetailsInChat");
+        "binding.horseinfomod.printDetailsInChat", null, null);
 
     public static
     Screen getConfigScreen(Screen parent)

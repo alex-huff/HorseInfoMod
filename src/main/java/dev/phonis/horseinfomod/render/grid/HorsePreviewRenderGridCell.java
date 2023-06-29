@@ -1,7 +1,7 @@
 package dev.phonis.horseinfomod.render.grid;
 
 import dev.phonis.horseinfomod.render.RenderUtils;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 
 public
@@ -26,14 +26,14 @@ class HorsePreviewRenderGridCell implements RenderGridCell
 
     @Override
     public
-    void render(MatrixStack matrixStack)
+    void render(DrawContext drawContext)
     {
-        matrixStack.push();
-        matrixStack.scale(scale, -scale, scale);
-        matrixStack.translate(HorsePreviewRenderGridCell.baseWidth / 2, -HorsePreviewRenderGridCell.baseHeight,
+        drawContext.getMatrices().push();
+        drawContext.getMatrices().scale(scale, -scale, scale);
+        drawContext.getMatrices().translate(HorsePreviewRenderGridCell.baseWidth / 2, -HorsePreviewRenderGridCell.baseHeight,
             HorsePreviewRenderGridCell.baseHeight);
-        RenderUtils.renderHorsePreview(matrixStack, horsie, tickDelta, HorsePreviewRenderGridCell.previewYaw);
-        matrixStack.pop();
+        RenderUtils.renderHorsePreview(drawContext.getMatrices(), horsie, tickDelta, HorsePreviewRenderGridCell.previewYaw);
+        drawContext.getMatrices().pop();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package dev.phonis.horseinfomod.render.grid;
 
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public
 interface RenderGridCell
@@ -19,7 +19,7 @@ interface RenderGridCell
         MIDDLE
     }
 
-    void render(MatrixStack matrixStack);
+    void render(DrawContext drawContext);
 
     double getWidth();
 

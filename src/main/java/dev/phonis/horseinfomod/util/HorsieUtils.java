@@ -5,7 +5,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import net.minecraft.entity.passive.HorseColor;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;

@@ -16,12 +16,12 @@ class HorseInfoMod implements ClientModInitializer
     public
     void onInitializeClient()
     {
-        HudRenderCallback.EVENT.register((matrixStack, tickDelta) ->
+        HudRenderCallback.EVENT.register((drawContext, tickDelta) ->
         {
             if (Keybindings.activateOverlayBinding.isPressed())
             {
-                HorsieUtils.getLookedAtHorse()
-                    .ifPresent((horsie) -> HorseOverlayRenderer.renderHorseOverlay(matrixStack, tickDelta, horsie));
+                HorsieUtils.getLookedAtHorse().ifPresent(
+                    (horsie) -> HorseOverlayRenderer.renderHorseOverlay(drawContext, tickDelta, horsie));
             }
         });
         ClientTickEvents.END_CLIENT_TICK.register(Keybindings::handle);
