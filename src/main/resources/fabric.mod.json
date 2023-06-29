@@ -36,7 +36,7 @@
     "fabric": "*",
     "minecraft": "~1.20.1",
     "fabric-key-binding-api-v1": "*",
-    "cloth-config2": ">=11.0.99\n",
+    "cloth-config2": ">=11.0.99",
     "java": ">=17"
   },
   "custom":
